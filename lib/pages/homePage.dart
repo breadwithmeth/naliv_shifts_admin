@@ -38,25 +38,21 @@ class _HomePageState extends State<HomePage> {
           Flexible(
             flex: 2,
             fit: FlexFit.tight,
-            child: Stack(
-              children: [
-                Container(
-                  color: Theme.of(context).colorScheme.secondary,
-                ),
-                const Text("Смены тип"),
-              ],
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Theme.of(context).colorScheme.secondary,
+              child: const Text("Смены тип"),
             ),
           ),
           Flexible(
             flex: 5,
             fit: FlexFit.tight,
-            child: Stack(
-              children: [
-                Container(
-                  color: Theme.of(context).colorScheme.primary,
-                ),
-                const Text("Календарь тип"),
-              ],
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              color: Theme.of(context).colorScheme.primary,
+              child: const Text("Календарь тип"),
             ),
           ),
         ],
