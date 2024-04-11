@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:naliv_shifts_naliv/api.dart';
 import 'package:naliv_shifts_naliv/pages/loginPage.dart';
+import 'package:month_picker_dialog/month_picker_dialog.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -11,8 +12,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   List _shifts = [];
-  _getShifts(int month) async {
-    List shifts = await getShifts(month);
+  _getShifts(int month, int year) async {
+    List shifts = await getShifts(month, year);
     setState(() {
       _shifts = shifts;
     });
@@ -22,7 +23,6 @@ class _HomePageState extends State<HomePage> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    _getShifts(4);
   }
 
   @override
@@ -59,18 +59,29 @@ class _HomePageState extends State<HomePage> {
                 Container(
                   color: Theme.of(context).colorScheme.secondary,
                 ),
-                const Text("Смены тип"),
+                FloatingActionButton(
+                  onPressed: () {
+                    showMonthPicker(
+                      context: context,
+                      initialDate: DateTime.now(),
+                    ).then((date) {
+                      getShifts(date!.month, date!.year);
+                    });
+                  },
+                  child: Icon(Icons.calendar_today),
+                ),
               ],
             ),
           ),
           Flexible(
-            flex: 5,
-            fit: FlexFit.tight,
-            child: Container(
-            width: double.infinity,
-            height: double.infinity,
-            color: Colors.black, child: Text("123"),)
-          ),
+              flex: 5,
+              fit: FlexFit.tight,
+              child: Container(
+                width: double.infinity,
+                height: double.infinity,
+                color: Colors.black,
+                child: Text("123"),
+              )),
         ],
       ),
     );
