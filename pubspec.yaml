@@ -38,6 +38,7 @@ dependencies:
   shared_preferences: ^2.2.2
   time_chart: ^0.5.5
   http: ^1.2.1
+  month_picker_dialog: ^2.11.2
 
 dev_dependencies:
   flutter_test:
