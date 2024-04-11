@@ -67,7 +67,7 @@ class _NalivShiftsAppState extends State<NalivShiftsApp> {
                     ),
                   ),
                   backgroundColor: const Color(0xFF3EB489),
-                  disabledBackgroundColor: const Color(0xFF9EDEC6),
+                  disabledBackgroundColor: const Color(0x333EB489),
                 ),
               ),
             ),
