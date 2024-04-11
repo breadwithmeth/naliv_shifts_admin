@@ -46,7 +46,7 @@ Future<bool?> login(String login) async {
 
 Future<List> getShifts(int month) async {
   String? token = await getToken();
-  if (token == null) {
+  if (token.isNotEmpty) {
     return [];
   }
   var url = Uri.https(URL_API, 'api/user/getShifts.php');

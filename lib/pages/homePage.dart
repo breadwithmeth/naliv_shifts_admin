@@ -68,7 +68,7 @@ class _HomePageState extends State<HomePage> {
               width: double.infinity,
               height: double.infinity,
               color: Theme.of(context).colorScheme.primary,
-              child: const Text("Календарь тип"),
+              child: const Text("Смены"),
             ),
           ),
         ],
