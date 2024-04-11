@@ -43,3 +43,19 @@ Future<bool?> login(String login) async {
     return false;
   }
 }
+
+Future<List> getShifts(int month) async {
+  String? token = await getToken();
+  if (token == null) {
+    return [];
+  }
+  var url = Uri.https(URL_API, 'api/user/getShifts.php');
+  var response = await http.post(url,
+      headers: {"Content-Type": "application/json", "AUTH": token},
+      body: json.encode({'month': month}));
+
+  // List<dynamic> list = json.decode(response.body);
+  List data = json.decode(utf8.decode(response.bodyBytes));
+  print(data);
+  return data;
+}

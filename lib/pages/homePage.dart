@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:naliv_shifts_naliv/api.dart';
 import 'package:naliv_shifts_naliv/pages/loginPage.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,6 +10,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List _shifts = [];
+  _getShifts(int month) async {
+    List shifts = await getShifts(month);
+    setState(() {
+      _shifts = shifts;
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    _getShifts(4);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
