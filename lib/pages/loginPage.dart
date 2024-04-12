@@ -93,19 +93,19 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                         ),
                       ),
-                      _preferences != null
-                          ? Flexible(
-                              child: Text(
-                                "Ваш токен: ${_preferences!.getString("token")}",
-                                style: TextStyle(
-                                  fontSize: 28,
-                                  fontWeight: FontWeight.w700,
-                                  color:
-                                      Theme.of(context).colorScheme.onPrimary,
-                                ),
-                              ),
-                            )
-                          : const SizedBox(),
+                      //   _preferences != null
+                      //       ? Flexible(
+                      //           child: Text(
+                      //             "Ваш токен: ${_preferences!.getString("token")}",
+                      //             style: TextStyle(
+                      //               fontSize: 28,
+                      //               fontWeight: FontWeight.w700,
+                      //               color:
+                      //                   Theme.of(context).colorScheme.onPrimary,
+                      //             ),
+                      //           ),
+                      //         )
+                      //       : const SizedBox(),
                     ],
                   ),
                 ),
@@ -118,55 +118,101 @@ class _LoginPageState extends State<LoginPage> {
             child: Container(
               width: double.infinity,
               height: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
               color: Theme.of(context).colorScheme.primary,
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                child: Flexible(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Flexible(
-                        child: Text(
-                          "Введите токен",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                            color: Theme.of(context).colorScheme.onPrimary,
-                          ),
-                        ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Flexible(
+                    child: Text(
+                      "Введите логин",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                        color: Theme.of(context).colorScheme.onPrimary,
                       ),
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Flexible(
-                                child: TextField(
-                                  controller: _textController,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w500,
-                                    color:
-                                        Theme.of(context).colorScheme.onPrimary,
-                                  ),
-                                  decoration: const InputDecoration(
-                                    focusedBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white),
-                                    ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: TextField(
+                              controller: _textController,
+                              onChanged: (value) {
+                                setState(() {});
+                              },
+                              cursorColor:
+                                  Theme.of(context).colorScheme.secondary,
+                              style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                                color: Theme.of(context).colorScheme.onPrimary,
+                              ),
+                              decoration: const InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 20),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Flexible(
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 35,
+                              ),
+                              child: ElevatedButton(
+                                onPressed: isLoginInProgress ||
+                                        _textController.text.isEmpty
+                                    ? null
+                                    : () {
+                                        _login();
+                                      },
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 10),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Flexible(
+                                        child: Text(
+                                          "Войти",
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w700,
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .onPrimary,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
-                      Flexible(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 20),
+                    ),
+                  ),
+                  widget.fromHomePage
+                      ? Flexible(
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -177,12 +223,16 @@ class _LoginPageState extends State<LoginPage> {
                                     horizontal: 35,
                                   ),
                                   child: ElevatedButton(
-                                    onPressed: isLoginInProgress ||
-                                            _textController.text.isEmpty
-                                        ? null
-                                        : () {
-                                            _login();
+                                    onPressed: () {
+                                      Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) {
+                                            return const HomePage();
                                           },
+                                        ),
+                                      );
+                                    },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 10),
@@ -192,7 +242,7 @@ class _LoginPageState extends State<LoginPage> {
                                         children: [
                                           Flexible(
                                             child: Text(
-                                              "Войти",
+                                              "Вернуться",
                                               style: TextStyle(
                                                 fontSize: 20,
                                                 fontWeight: FontWeight.w700,
@@ -210,62 +260,9 @@ class _LoginPageState extends State<LoginPage> {
                               ),
                             ],
                           ),
-                        ),
-                      ),
-                      widget.fromHomePage
-                          ? Flexible(
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 35,
-                                      ),
-                                      child: ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) {
-                                                return const HomePage();
-                                              },
-                                            ),
-                                          );
-                                        },
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 10),
-                                          child: Row(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Flexible(
-                                                child: Text(
-                                                  "Вернуться",
-                                                  style: TextStyle(
-                                                    fontSize: 20,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimary,
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            )
-                          : const SizedBox(),
-                    ],
-                  ),
-                ),
+                        )
+                      : const SizedBox(),
+                ],
               ),
             ),
           ),
